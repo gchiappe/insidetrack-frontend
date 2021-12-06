@@ -7,7 +7,7 @@ WORKDIR /src
 RUN yarn
 RUN yarn build
 FROM python:3.9-alpine
-COPY --from=build /src/dist/angular-frontend /frontend/
+COPY --from=build /src/dist/frontend /frontend/
 RUN rm -rf /src
 EXPOSE 8000
 CMD python3 -m http.server 8000 --directory /frontend
