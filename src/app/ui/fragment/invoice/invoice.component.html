@@ -1,0 +1,29 @@
+<div>
+  <h2>Invoice #{{invoice.number}}</h2>
+  <p>
+    <b>Purchase date:</b> {{invoice.purchaseDate}}<br>
+    <b>Total Payment:</b> US$ {{invoice.totalPayment}}
+  </p>
+  <p>
+    <b>Customer</b><br>
+    Name: {{invoice.customer.name}}<br>
+    Location: {{invoice.customer.address}}
+  </p>
+  <p>
+    <b>Distributor</b><br>
+    Name: {{invoice.distributor.name}}<br>
+    Location: {{invoice.distributor.address}}
+  </p>
+  <div *ngFor="let detail of invoice.details">
+    <h4>Product #{{detail.product.code}} - {{detail.product.name}}</h4>
+    <p>
+      <span *ngIf="detail.quantity">Quantity: {{detail.quantity}}<br></span>
+      Weight: {{detail.weight}}<br>
+      Unit Price: US$ {{detail.unitPrice}}<br>
+      Unit of Measure: {{detail.measureUnit}}<br>
+      <b>Total</b>: US$ {{detail.total}}
+    </p>
+  </div>
+</div>
+
+<p>{{invoice | json}}</p>
