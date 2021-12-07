@@ -3,7 +3,7 @@ LABEL AUTHOR="Giancarlo A. Chiappe Aguilar"
 COPY . /ngsrc
 WORKDIR /ngsrc
 ARG BACKEND
-RUN echo "{\"api\":\"${BACKEND}\"}" > /src/backend.json
+RUN echo "{\"api\":\"${BACKEND}\"}" > src/backend.json
 RUN yarn
 RUN yarn build
 FROM python:3.9-alpine
