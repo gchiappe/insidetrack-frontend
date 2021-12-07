@@ -1,26 +1,54 @@
 <h1>
   InsideTrack's Test Application
 </h1>
-<h2>Invoices By Product</h2>
-<div>
-  <p-autoComplete
-    [(ngModel)]="selectedProduct"
-    [suggestions]="filteredProducts"
-    (completeMethod)="search($event)"
-    [dropdown]="true"
-    (onSelect)="loadInvoicesByProduct($event)"
-    field="name"
-  ></p-autoComplete>
+<p>
+  © 2021 Giancarlo Chiappe Aguilar
+</p>
+<h2>Grouping Options</h2>
+<div class="flex flex-wrap" style="margin-bottom: 30px">
+  <div class="m-2">
+    <h3>Invoices By Number</h3>
+    <div class="p-inputgroup">
+      <input #invoiceNumber type="text" pInputText placeholder="Invoice Number (####)">
+      <button (click)="loadInvoiceByNumber(invoiceNumber.value)"
+              type="button"
+              title="Load"
+              pButton pRipple
+              icon="pi pi-refresh"
+              styleClass="p-button-warn"></button>
+    </div>
+  </div>
+  <div class="m-2">
+    <h3>Invoices By Distributor</h3>
+    <p-autoComplete
+      [(ngModel)]="selectedDistributor"
+      [suggestions]="filteredDistributors"
+      (completeMethod)="searchDistributor($event)"
+      [dropdown]="true"
+      (onSelect)="loadInvoicesByDistributorName($event)"
+      field="name"></p-autoComplete>
+  </div>
+  <div class="m-2">
+    <h3>Invoices By Customer Location</h3>
+    <p-autoComplete
+      [(ngModel)]="selectedCustomer"
+      [suggestions]="filteredCustomers"
+      (completeMethod)="searchCustomer($event)"
+      [dropdown]="true"
+      (onSelect)="loadInvoicesByCustomerLocation($event)"
+      field="name"></p-autoComplete>
+  </div>
+  <div class="m-2">
+    <h3>Invoices By Product</h3>
+    <p-autoComplete
+      [(ngModel)]="selectedProduct"
+      [suggestions]="filteredProducts"
+      (completeMethod)="search($event)"
+      [dropdown]="true"
+      (onSelect)="loadInvoicesByProduct($event)"
+      field="name"></p-autoComplete>
+  </div>
 </div>
-
 <div *ngFor="let invoice of invoices">
   <app-invoice [invoice]="invoice"></app-invoice>
 </div>
-
-<!--<div>-->
-<!--  {{selectedProduct | json}}-->
-<!--</div>-->
-
-<!--<div>-->
-<!--  {{invoices | json}}-->
-<!--</div>-->

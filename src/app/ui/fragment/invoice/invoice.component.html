@@ -1,29 +1,83 @@
+<hr>
 <div>
-  <h2>Invoice #{{invoice.number}}</h2>
-  <p>
-    <b>Purchase date:</b> {{invoice.purchaseDate}}<br>
-    <b>Total Payment:</b> US$ {{invoice.totalPayment}}
-  </p>
-  <p>
-    <b>Customer</b><br>
-    Name: {{invoice.customer.name}}<br>
-    Location: {{invoice.customer.address}}
-  </p>
-  <p>
-    <b>Distributor</b><br>
-    Name: {{invoice.distributor.name}}<br>
-    Location: {{invoice.distributor.address}}
-  </p>
-  <div *ngFor="let detail of invoice.details">
-    <h4>Product #{{detail.product.code}} - {{detail.product.name}}</h4>
-    <p>
-      <span *ngIf="detail.quantity">Quantity: {{detail.quantity}}<br></span>
-      Weight: {{detail.weight}}<br>
-      Unit Price: US$ {{detail.unitPrice}}<br>
-      Unit of Measure: {{detail.measureUnit}}<br>
-      <b>Total</b>: US$ {{detail.total}}
-    </p>
-  </div>
+  <p-table [value]="invoice.details" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th colspan="3" rowspan="3">
+          <h2>Invoice #{{invoice.number}}</h2>
+        </th>
+        <th>Purchase date</th>
+        <th colspan="4">{{invoice.purchaseDate}}</th>
+      </tr>
+      <tr>
+        <th colspan="1">Customer</th>
+        <th style="font-weight: normal" colspan="2">{{invoice.customer.name}}</th>
+        <th colspan="1">Address</th>
+        <th style="font-weight: normal" colspan="2">{{invoice.customer.address}}</th>
+      </tr>
+      <tr>
+        <th colspan="1">Distributor</th>
+        <th style="font-weight: normal" colspan="2">{{invoice.distributor.name}}</th>
+        <th colspan="1">Address</th>
+        <th style="font-weight: normal" colspan="2">{{invoice.distributor.address}}</th>
+      </tr>
+      <tr>
+        <th pSortableColumn="product.code">Code <p-sortIcon field="product.code"></p-sortIcon></th>
+        <th pSortableColumn="product.name" colspan="2">Product <p-sortIcon field="product.name"></p-sortIcon></th>
+        <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+        <th pSortableColumn="weight">Weight <p-sortIcon field="weight"></p-sortIcon></th>
+        <th pSortableColumn="unitPrice">Unit Price <p-sortIcon field="unitPrice"></p-sortIcon></th>
+        <th pSortableColumn="measureUnit">Measure Unit <p-sortIcon field="measureUnit"></p-sortIcon></th>
+        <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-detailRow>
+      <tr>
+        <td>{{detailRow.product.code}}</td>
+        <td colspan="2">{{detailRow.product.name}}</td>
+        <td>{{ detailRow.quantity }}</td>
+        <td>{{ detailRow.weight }}</td>
+        <td>{{ detailRow.unitPrice | currency: 'USD'}}</td>
+        <td>{{ detailRow.measureUnit }}</td>
+        <td>{{ detailRow.total | currency: 'USD'}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="7" style="text-align: right">Totals</td>
+        <td>{{ invoice.totalPayment | currency: 'USD'}}</td>
+<!--        <td>{{thisYearTotal | currency: 'USD'}}</td>-->
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
+<!--<hr>-->
+<!--<div>-->
+<!--  <h2>Invoice #{{invoice.number}}</h2>-->
+<!--  <p>-->
+<!--    <b>Purchase date:</b> {{invoice.purchaseDate}}<br>-->
+<!--    <b>Total Payment:</b> US$ {{invoice.totalPayment}}-->
+<!--  </p>-->
+<!--  <p>-->
+<!--    <b>Customer</b><br>-->
+<!--    Name: {{invoice.customer.name}}<br>-->
+<!--    Location: {{invoice.customer.address}}-->
+<!--  </p>-->
+<!--  <p>-->
+<!--    <b>Distributor</b><br>-->
+<!--    Name: {{invoice.distributor.name}}<br>-->
+<!--    Location: {{invoice.distributor.address}}-->
+<!--  </p>-->
+<!--  <div *ngFor="let detail of invoice.details">-->
+<!--    <h4>Product #{{detail.product.code}} - {{detail.product.name}}</h4>-->
+<!--    <p>-->
+<!--      <span *ngIf="detail.quantity">Quantity: {{detail.quantity}}<br></span>-->
+<!--      Weight: {{detail.weight}}<br>-->
+<!--      Unit Price: US$ {{detail.unitPrice}}<br>-->
+<!--      Unit of Measure: {{detail.measureUnit}}<br>-->
+<!--      <b>Total</b>: US$ {{detail.total}}-->
+<!--    </p>-->
+<!--  </div>-->
+<!--</div>-->
 
-<p>{{invoice | json}}</p>
+<!--<p>{{invoice | json}}</p>-->

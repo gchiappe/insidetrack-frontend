@@ -11,6 +11,9 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { InvoiceComponent } from './ui/fragment/invoice/invoice.component';
+import {TableModule} from 'primeng/table';
+import {InputTextModule} from 'primeng/inputtext';
+import {RippleModule} from 'primeng/ripple';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { InvoiceComponent } from './ui/fragment/invoice/invoice.component';
     ButtonModule,
     AutoCompleteModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TableModule,
+    InputTextModule,
+    RippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
